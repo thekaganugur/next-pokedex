@@ -1,12 +1,12 @@
+import { Header } from "@/components/header"
 import PokemonTypes from "@/components/pokemon-types"
+import { Shell } from "@/components/shell"
 import { getPokemons } from "@/lib/api"
 import { getPokemon } from "@/lib/getPokemon"
 import { getPokemonSpecies } from "@/lib/getSpecies"
 import { capitalize } from "@/lib/utils"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-
-// import Link from "next/link";
 
 interface PageProps {
   params: {
@@ -15,7 +15,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const pokemons = await getPokemons()
+  const pokemons = await getPokemons({})
 
   if (!pokemons) {
     notFound()
@@ -54,9 +54,8 @@ export default async function PokemonPage({ params }: PageProps) {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>{pokemon.name}</h1>
-      <div>
+    <Shell>
+      <div className="flex flex-col gap-8 md:flex-row md:gap-16">
         <img
           src={pokemon.sprites.front_default}
           alt="Pokemon"
@@ -64,28 +63,32 @@ export default async function PokemonPage({ params }: PageProps) {
           height="150px"
         />
 
-        {pokemonSpecies.flavor_text_entries[0].flavor_text}
+        <div className="flex flex-col gap-6 ">
+          <Header title={capitalize(pokemon.name)} />
 
-        <div>
+          <div>{pokemonSpecies.flavor_text_entries[0].flavor_text}</div>
+
           <div>
-            <span>Height</span>
-            <span>{pokemon.height}</span>
+            <div>
+              <span>Height</span>
+              <span>{pokemon.height}</span>
+            </div>
+            <div>
+              <span>Weight</span>
+              <span>{pokemon.weight}</span>
+            </div>
           </div>
+
           <div>
-            <span>Weight</span>
-            <span>{pokemon.weight}</span>
+            <div>Abilites</div>
+            {pokemon.abilities.map(({ ability }) => (
+              <div key={ability.name}>{ability.name}</div>
+            ))}
           </div>
-        </div>
 
-        <div>
-          <div>Abilites</div>
-          {pokemon.abilities.map(({ ability }) => (
-            <div key={ability.name}>{ability.name}</div>
-          ))}
+          <PokemonTypes types={pokemon.types.map(({ type }) => type.name)} />
         </div>
-
-        <PokemonTypes types={pokemon.types.map(({ type }) => type.name)} />
       </div>
-    </main>
+    </Shell>
   )
 }

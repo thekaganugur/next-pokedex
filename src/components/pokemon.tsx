@@ -1,34 +1,42 @@
-"use client"
-
-import { getPokemon } from "@/lib/getPokemon"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Pokemon } from "@/lib/getPokemon"
 import Link from "next/link"
-import useSWR from "swr"
+import { Button } from "./ui/button"
 
-export function Pokemon({ pokemonName }: { pokemonName: string }) {
-  const { data, isLoading, error } = useSWR("pokemons", () =>
-    getPokemon(pokemonName)
-  )
+type Props = {
+  pokemon: Pokemon
+}
 
-  if (error) {
-    return null
-  }
-  if (isLoading) {
-    return <div>...</div>
-  }
-
+export function PokemonCard(props: Props) {
+  const { pokemon } = props
   return (
-    <Link
-      key={pokemonName}
-      href={`/pokemon/${pokemonName}`}
-      className="flex flex-col items-center gap-1"
-    >
-      <img
-        src={data.sprites.front_default}
-        alt="Pokemon"
-        width="150px"
-        height="150px"
-      />
-      <span className="capitalize">{data.name}</span>
-    </Link>
+    <Card>
+      <Link href={`/pokemons/${pokemon.name}`}>
+        <CardHeader>
+          <img
+            src={pokemon.sprites.front_default}
+            alt="Pokemon"
+            width="150px"
+            height="150px"
+            className="mx-auto"
+          />
+        </CardHeader>
+      </Link>
+      <CardContent>
+        <CardTitle className="capitalize">{pokemon.name}</CardTitle>
+      </CardContent>
+      <CardFooter>
+        <Button asChild size="sm" className="h-8 w-full rounded-sm">
+          <Link href={`/pokemons/${pokemon.name}`}>Preview</Link>
+        </Button>
+      </CardFooter>
+    </Card>
   )
 }

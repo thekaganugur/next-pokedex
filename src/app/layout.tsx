@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils"
 import "./globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
@@ -16,16 +17,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          inter.className
+        )}
+      >
         <header className="sticky top-0 z-40 w-full border-b bg-white">
           <div className="container flex h-16 items-center ">
-            <Link href="/" className="select-none text-xl text-red-400">
+            <Link href="/" className="select-none font-bold">
               Pokedex
             </Link>
           </div>
         </header>
 
-        <main className="min-h-screen">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   )

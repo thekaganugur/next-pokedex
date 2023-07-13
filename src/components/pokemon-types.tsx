@@ -1,4 +1,5 @@
 import { PokemonType } from "@/lib/getPokemon"
+import { Badge } from "./ui/badge"
 
 type Props = { types: PokemonType[] }
 
@@ -26,13 +27,17 @@ const PokemonTypeColors: Record<PokemonType, string> = {
 }
 
 export default function PokemonTypes({ types }: Props) {
-  return types.map((type) => (
-    <div
-      key={type}
-      style={{ color: PokemonTypeColors[type] }}
-      className={`flex justify-center rounded-xl border border-current px-1 py-0.5 capitalize`}
-    >
-      {type}
+  return (
+    <div className="flex gap-2">
+      {types.map((type) => (
+        <Badge variant="outline" key={type} className="gap-1">
+          <div
+            style={{ background: PokemonTypeColors[type] }}
+            className={` h-2 w-2 rounded-full`}
+          />
+          <div className="capitalize ">{type}</div>
+        </Badge>
+      ))}
     </div>
-  ))
+  )
 }

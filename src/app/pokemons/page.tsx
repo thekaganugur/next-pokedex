@@ -1,3 +1,4 @@
+import { PokemonCard } from "@/components/pokemon"
 import { Shell } from "@/components/shell"
 import { getPokemons } from "@/lib/api"
 import { getPokemon } from "@/lib/getPokemon"
@@ -6,45 +7,22 @@ import { notFound } from "next/navigation"
 
 // import Image from "next/image";
 
-async function Pokemon({ pokemonName }: { pokemonName: string }) {
-  const pokemon = await getPokemon(pokemonName)
-
-  if (!pokemon) {
-    return null
-  }
-
-  return (
-    <Link
-      key={pokemonName}
-      href={`/pokemons/${pokemonName}`}
-      className="flex flex-col items-center gap-1"
-    >
-      <img
-        src={pokemon.sprites.front_default}
-        alt="Pokemon"
-        width="150px"
-        height="150px"
-      />
-      <span className="capitalize">{pokemon.name}</span>
-    </Link>
-  )
-}
-
 export default async function Pokemons() {
-  const pokemons = await getPokemons()
+  const pokemons = await getPokemons({})
 
   if (!pokemons) {
     notFound()
   }
 
+  const pokemonsWithDetails = await Promise.all(
+    pokemons.results.map(({ name }) => getPokemon(name))
+  )
+
   return (
     <Shell>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {pokemons.results.map(({ name }) => (
-          <Pokemon key={name} pokemonName={name} />
-        ))}
-        {pokemons.results.map(({ name }) => (
-          <Pokemon key={name} pokemonName={name} />
+        {pokemons.results.map(({ name }, i) => (
+          <PokemonCard key={name} pokemon={pokemonsWithDetails[i]} />
         ))}
       </div>
     </Shell>
