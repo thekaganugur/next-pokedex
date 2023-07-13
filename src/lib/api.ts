@@ -9,13 +9,13 @@ export function client<Response>(
       "Content-Type": "application/json",
       ...customConfig.headers,
     },
-  };
-
-  if (body) {
-    config.body = typeof body === "object" ? JSON.stringify(body) : body;
   }
 
-  return fetch(url, config).then((res) => res.json() as Response);
+  if (body) {
+    config.body = typeof body === "object" ? JSON.stringify(body) : body
+  }
+
+  return fetch(url, config).then((res) => res.json() as Response)
   // return fetch(url, config).then((response) => {
   //   if (response.ok) {
   //     return response.json() as Response;
@@ -28,19 +28,19 @@ export function client<Response>(
 }
 
 export type Pagination<T> = {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: T[];
-};
+  count: number
+  next: string | null
+  previous: string | null
+  results: T[]
+}
 
 export function pokemonClient<Response>(
   endpoint: string,
   config: RequestInit = {}
 ) {
-  return client<Response>(`https://pokeapi.co/api/v2/${endpoint}`, config);
+  return client<Response>(`https://pokeapi.co/api/v2/${endpoint}`, config)
 }
 
 export function getPokemons() {
-  return pokemonClient<Pagination<{ name: string; url: string }>>(`pokemon`);
+  return pokemonClient<Pagination<{ name: string; url: string }>>(`pokemon`)
 }

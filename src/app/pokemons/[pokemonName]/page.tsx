@@ -1,55 +1,56 @@
-import PokemonTypes from "@/components/pokemon-types";
-import { getPokemons } from "@/lib/api";
-import { getPokemon } from "@/lib/getPokemon";
-import { getPokemonSpecies } from "@/lib/getSpecies";
-import { capitalize } from "@/lib/utils";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import PokemonTypes from "@/components/pokemon-types"
+import { getPokemons } from "@/lib/api"
+import { getPokemon } from "@/lib/getPokemon"
+import { getPokemonSpecies } from "@/lib/getSpecies"
+import { capitalize } from "@/lib/utils"
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
+
 // import Link from "next/link";
 
 interface PageProps {
   params: {
-    pokemonName: string;
-  };
+    pokemonName: string
+  }
 }
 
 export async function generateStaticParams() {
-  const pokemons = await getPokemons();
+  const pokemons = await getPokemons()
 
   if (!pokemons) {
-    notFound();
+    notFound()
   }
 
-  return pokemons.results.map(({ name }) => ({ pokemonName: name }));
+  return pokemons.results.map(({ name }) => ({ pokemonName: name }))
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const pokemon = await getPokemon(params.pokemonName);
+  const pokemon = await getPokemon(params.pokemonName)
 
   if (!pokemon?.name) {
     return {
       title: "Pokemon not found",
-    };
+    }
   }
 
   return {
     title: capitalize(pokemon.name),
-  };
+  }
 }
 
 export default async function PokemonPage({ params }: PageProps) {
-  const pokemon = await getPokemon(params.pokemonName);
+  const pokemon = await getPokemon(params.pokemonName)
 
   if (!pokemon) {
-    notFound();
+    notFound()
   }
 
-  const pokemonSpecies = await getPokemonSpecies(pokemon.species.name);
+  const pokemonSpecies = await getPokemonSpecies(pokemon.species.name)
 
   if (!pokemonSpecies) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -86,5 +87,5 @@ export default async function PokemonPage({ params }: PageProps) {
         <PokemonTypes types={pokemon.types.map(({ type }) => type.name)} />
       </div>
     </main>
-  );
+  )
 }

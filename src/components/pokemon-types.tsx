@@ -1,6 +1,6 @@
-import { PokemonType } from "@/lib/getPokemon";
+import { PokemonType } from "@/lib/getPokemon"
 
-type Props = { types: PokemonType[] };
+type Props = { types: PokemonType[] }
 
 const PokemonTypeColors: Record<PokemonType, string> = {
   normal: "#A8A77A",
@@ -23,16 +23,16 @@ const PokemonTypeColors: Record<PokemonType, string> = {
   fairy: "#D685AD",
   unknown: "#68A090",
   shadow: "#493963",
-};
+}
 
 export default function PokemonTypes({ types }: Props) {
   return types.map((type) => (
     <div
       key={type}
       style={{ color: PokemonTypeColors[type] }}
-      className={`border rounded-xl border-current py-0.5 px-1 flex justify-center capitalize`}
+      className={`flex justify-center rounded-xl border border-current px-1 py-0.5 capitalize`}
     >
       {type}
     </div>
-  ));
+  ))
 }

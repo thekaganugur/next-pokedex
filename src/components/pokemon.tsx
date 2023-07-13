@@ -1,18 +1,19 @@
-"use client";
-import { getPokemon } from "@/lib/getPokemon";
-import Link from "next/link";
-import useSWR from "swr";
+"use client"
+
+import { getPokemon } from "@/lib/getPokemon"
+import Link from "next/link"
+import useSWR from "swr"
 
 export function Pokemon({ pokemonName }: { pokemonName: string }) {
   const { data, isLoading, error } = useSWR("pokemons", () =>
     getPokemon(pokemonName)
-  );
+  )
 
   if (error) {
-    return null;
+    return null
   }
   if (isLoading) {
-    return <div>...</div>;
+    return <div>...</div>
   }
 
   return (
@@ -29,5 +30,5 @@ export function Pokemon({ pokemonName }: { pokemonName: string }) {
       />
       <span className="capitalize">{data.name}</span>
     </Link>
-  );
+  )
 }

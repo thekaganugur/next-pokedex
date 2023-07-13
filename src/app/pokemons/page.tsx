@@ -1,15 +1,16 @@
-import { getPokemons } from "@/lib/api";
-import { notFound } from "next/navigation";
-import { getPokemon } from "@/lib/getPokemon";
-import Link from "next/link";
-import { Shell } from "@/components/shell";
+import { Shell } from "@/components/shell"
+import { getPokemons } from "@/lib/api"
+import { getPokemon } from "@/lib/getPokemon"
+import Link from "next/link"
+import { notFound } from "next/navigation"
+
 // import Image from "next/image";
 
 async function Pokemon({ pokemonName }: { pokemonName: string }) {
-  const pokemon = await getPokemon(pokemonName);
+  const pokemon = await getPokemon(pokemonName)
 
   if (!pokemon) {
-    return null;
+    return null
   }
 
   return (
@@ -26,14 +27,14 @@ async function Pokemon({ pokemonName }: { pokemonName: string }) {
       />
       <span className="capitalize">{pokemon.name}</span>
     </Link>
-  );
+  )
 }
 
 export default async function Pokemons() {
-  const pokemons = await getPokemons();
+  const pokemons = await getPokemons()
 
   if (!pokemons) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -47,5 +48,5 @@ export default async function Pokemons() {
         ))}
       </div>
     </Shell>
-  );
+  )
 }
