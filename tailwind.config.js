@@ -2,11 +2,11 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -65,10 +65,19 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+        shake: {
+          "0%": { transform: "rotate(0)" },
+          "20%": { transform: "rotate(-20deg)" },
+          "30%": { transform: "rotate(20deg)" },
+          "50%": { transform: "rotate(-10deg)" },
+          "60%": { transform: "rotate(10deg)" },
+          "100%": { transform: "rotate(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        shake: "shake 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite",
       },
     },
   },

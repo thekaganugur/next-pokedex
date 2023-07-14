@@ -15,7 +15,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const pokemons = await getPokemons({})
+  const pokemons = await getPokemons({ limit: 12 })
 
   if (!pokemons) {
     notFound()
@@ -37,11 +37,6 @@ export async function generateMetadata({
 
   return {
     title: capitalize(pokemon.name),
-  }
-}
-interface ProductsPageProps {
-  searchParams: {
-    [key: string]: string | string[] | undefined
   }
 }
 
@@ -69,7 +64,10 @@ export default async function PokemonPage({ params }: PageProps) {
         />
 
         <div className="flex flex-col gap-6 ">
-          <Header title={capitalize(pokemon.name)} />
+          <Header
+            title={capitalize(pokemon.name)}
+            description={`#${pokemon.id}`}
+          />
 
           <div>{pokemonSpecies.flavor_text_entries[0].flavor_text}</div>
 

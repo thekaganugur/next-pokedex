@@ -31,6 +31,7 @@ export function PokemonCard(props: Props) {
       </Link>
       <CardContent>
         <CardTitle className="capitalize">{pokemon.name}</CardTitle>
+        <CardDescription>#{pokemon.id}</CardDescription>
       </CardContent>
       <CardFooter>
         <Button
