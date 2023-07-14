@@ -1,8 +1,6 @@
-import { PokemonCard } from "@/components/pokemon"
+import { PokemonCard, PokemonCardSkeleton } from "@/components/pokemon"
 import { Shell } from "@/components/shell"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
 import pokemonsData from "@/data/pokemons.json"
 import { getPokemons } from "@/lib/api"
 import { getPokemon } from "@/lib/getPokemon"
@@ -15,19 +13,7 @@ function HighlightedPokemonsSkeleton() {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {Array.from({ length: 4 }).map((_, i) => (
-        <Card key={i} className="rounded-sm">
-          <CardHeader>
-            <Skeleton className="mx-auto h-[150px] w-[150px]" />
-          </CardHeader>
-          <CardContent className="flex flex-col gap-2">
-            <Skeleton className="h-4 w-1/2" />
-            <Skeleton className="h-4 w-1/4" />
-          </CardContent>
-          <CardFooter>
-            <Skeleton className="h-8 w-full rounded-sm" />
-            <Skeleton className="h-8 w-full rounded-sm" />
-          </CardFooter>
-        </Card>
+        <PokemonCardSkeleton key={i} />
       ))}
     </div>
   )

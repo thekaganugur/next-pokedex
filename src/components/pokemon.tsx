@@ -10,9 +10,28 @@ import { Pokemon } from "@/lib/getPokemon"
 import Link from "next/link"
 import PokemonTypes from "./pokemon-types"
 import { Button } from "./ui/button"
+import { Skeleton } from "./ui/skeleton"
 
 type Props = {
   pokemon: Pokemon
+}
+
+export function PokemonCardSkeleton() {
+  return (
+    <Card className="rounded-sm">
+      <CardHeader>
+        <Skeleton className="mx-auto h-[150px] w-[150px]" />
+      </CardHeader>
+      <CardContent className="flex flex-col gap-2">
+        <Skeleton className="h-4 w-1/2" />
+        <Skeleton className="h-4 w-1/4" />
+      </CardContent>
+      <CardFooter>
+        <Skeleton className="h-8 w-full rounded-sm" />
+        <Skeleton className="h-8 w-full rounded-sm" />
+      </CardFooter>
+    </Card>
+  )
 }
 
 export function PokemonCard(props: Props) {
