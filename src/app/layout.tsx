@@ -1,33 +1,15 @@
 import { cn } from "@/lib/utils"
 import "./globals.css"
+import { PokeBall } from "@/components/poke-ball"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
-import pokeBall from "../../public/ball-game-poke-sport-sports-svgrepo-com.svg"
-import pokemons from "../data/pokemons.json"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Pokedex",
-}
-
-function PokeBall() {
-  return (
-    <Link
-      href={`/pokemons/${
-        pokemons[Math.floor(Math.random() * pokemons.length + 1)]
-      }`}
-    >
-      <Image
-        priority
-        src={pokeBall}
-        alt="Explore a random pokemon"
-        className="h-8 w-8 hover:animate-shake"
-      />
-    </Link>
-  )
 }
 
 export default function RootLayout({

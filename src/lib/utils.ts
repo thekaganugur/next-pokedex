@@ -1,3 +1,4 @@
+import pokemons from "@/data/pokemons.json"
 import { ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -7,6 +8,10 @@ export function cn(...inputs: ClassValue[]) {
 
 export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+export function getRandomPokemonId() {
+  return Math.floor(Math.random() * pokemons.length + 1)
 }
 
 export function createQueryString(

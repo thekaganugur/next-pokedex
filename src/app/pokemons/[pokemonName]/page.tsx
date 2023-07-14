@@ -1,7 +1,6 @@
 import { Header } from "@/components/header"
 import PokemonTypes from "@/components/pokemon-types"
 import { Shell } from "@/components/shell"
-import { getPokemons } from "@/lib/api"
 import { getPokemon } from "@/lib/getPokemon"
 import { getPokemonSpecies } from "@/lib/getSpecies"
 import { capitalize } from "@/lib/utils"
@@ -12,16 +11,6 @@ interface PageProps {
   params: {
     pokemonName: string
   }
-}
-
-export async function generateStaticParams() {
-  const pokemons = await getPokemons({ limit: 12 })
-
-  if (!pokemons) {
-    notFound()
-  }
-
-  return pokemons.results.map(({ name }) => ({ pokemonName: name }))
 }
 
 export async function generateMetadata({

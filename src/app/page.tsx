@@ -7,8 +7,10 @@ import { getPokemon } from "@/lib/getPokemon"
 import { Github } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { Suspense } from "react"
+import Loading from "./pokemons/loading"
 
-export default async function HomePage() {
+async function HighlightedPokemons() {
   const limit = 4
   const pageCount = Math.ceil(pokemonsData.length / limit)
   const pokemons = await getPokemons(
@@ -24,6 +26,16 @@ export default async function HomePage() {
     pokemons.results.map(({ name }) => getPokemon(name))
   )
 
+  return (
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {pokemons.results.slice(undefined, 4).map(({ name }, i) => (
+        <PokemonCard key={name} pokemon={pokemonsWithDetails[i]} />
+      ))}
+    </div>
+  )
+}
+
+export default async function HomePage() {
   return (
     <Shell as="div">
       <section className="mx-auto flex max-w-[64rem] flex-col items-center justify-center gap-10 py-6 text-center md:py-12 lg:py-32">
@@ -55,11 +67,9 @@ export default async function HomePage() {
             <Link href="/pokemons">View all</Link>
           </Button>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {pokemons.results.slice(undefined, 4).map(({ name }, i) => (
-            <PokemonCard key={name} pokemon={pokemonsWithDetails[i]} />
-          ))}
-        </div>
+        <Suspense fallback={<Loading />}>
+          <HighlightedPokemons />
+        </Suspense>
       </section>
     </Shell>
   )
