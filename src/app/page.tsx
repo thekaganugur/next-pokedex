@@ -8,9 +8,13 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 
 export default async function HomePage() {
-  const pokemons = await getPokemons({
-    page: Math.floor(Math.random() * 51),
-  })
+  const { count } = await getPokemons({ limit: 0 })
+  const limit = 4
+  const pageCount = Math.ceil(count / limit)
+  const pokemons = await getPokemons(
+    { page: Math.floor(Math.random() * pageCount), limit },
+    { cache: "no-cache" }
+  )
 
   if (!pokemons) {
     notFound()
@@ -19,6 +23,7 @@ export default async function HomePage() {
   const pokemonsWithDetails = await Promise.all(
     pokemons.results.map(({ name }) => getPokemon(name))
   )
+
   return (
     <Shell as="div">
       <section className="mx-auto flex max-w-[64rem] flex-col items-center justify-center gap-10 py-6 text-center md:py-12 lg:py-32">

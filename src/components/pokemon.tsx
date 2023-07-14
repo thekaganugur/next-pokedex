@@ -33,7 +33,12 @@ export function PokemonCard(props: Props) {
         <CardTitle className="capitalize">{pokemon.name}</CardTitle>
       </CardContent>
       <CardFooter>
-        <Button asChild size="sm" className="h-8 w-full rounded-sm">
+        <Button
+          asChild
+          variant="secondary"
+          size="sm"
+          className="h-8 w-full rounded-sm"
+        >
           <Link href={`/pokemons/${pokemon.name}`}>Preview</Link>
         </Button>
       </CardFooter>

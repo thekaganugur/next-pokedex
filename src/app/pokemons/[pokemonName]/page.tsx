@@ -39,6 +39,11 @@ export async function generateMetadata({
     title: capitalize(pokemon.name),
   }
 }
+interface ProductsPageProps {
+  searchParams: {
+    [key: string]: string | string[] | undefined
+  }
+}
 
 export default async function PokemonPage({ params }: PageProps) {
   const pokemon = await getPokemon(params.pokemonName)

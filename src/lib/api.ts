@@ -41,16 +41,20 @@ export function pokemonClient<Response>(
   return client<Response>(`https://pokeapi.co/api/v2/${endpoint}`, config)
 }
 
-export function getPokemons({
-  limit = 20,
-  page = 1,
-}: {
-  limit?: number
-  page?: number
-}) {
+export function getPokemons(
+  {
+    limit,
+    page = 1,
+  }: {
+    limit: number
+    page?: number
+  },
+  config?: RequestInit
+) {
   const offset = limit * (page - 1)
 
   return pokemonClient<Pagination<{ name: string; url: string }>>(
-    `pokemon?offset=${offset}&limit=${limit}`
+    `pokemon?offset=${offset}&limit=${limit}`,
+    config
   )
 }
