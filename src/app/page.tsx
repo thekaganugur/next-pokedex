@@ -68,7 +68,7 @@ export default async function HomePage() {
       </section>
 
       <section className="space-y-6 py-6 md:pt-10 lg:pt-32">
-        <div className="flex justify-between">
+        <div className="flex items-center justify-between">
           <h2 className="scroll-m-20 pb-2 text-2xl font-semibold tracking-tight transition-colors first:mt-0 sm:text-3xl">
             Highligted Pokemons
           </h2>
