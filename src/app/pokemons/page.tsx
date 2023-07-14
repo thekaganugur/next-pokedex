@@ -1,3 +1,4 @@
+import { Header } from "@/components/header"
 import PaginationButton from "@/components/pagination-button"
 import { PokemonCard } from "@/components/pokemon"
 import { Shell } from "@/components/shell"
@@ -37,6 +38,7 @@ export default async function Pokemons({ searchParams }: Props) {
 
   return (
     <Shell>
+      <Header title="Pokemons" />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {pokemons.results.map(({ name }, i) => (
           <PokemonCard key={name} pokemon={pokemonsWithDetails[i]} />

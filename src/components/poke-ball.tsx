@@ -1,11 +1,11 @@
 "use client"
 
-import pokeBall from "@/../public/ball-game-poke-sport-sports-svgrepo-com.svg"
 import pokemons from "@/data/pokemons.json"
 import { getRandomPokemonId } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
 import React, { useState } from "react"
+import pokeBall from "../../public/ball-game-poke-sport-sports-svgrepo-com.svg"
 
 export function PokeBall() {
   const [pokemonId, setPokemonId] = useState<number>()
