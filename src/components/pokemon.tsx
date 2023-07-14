@@ -7,8 +7,11 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Pokemon } from "@/lib/getPokemon"
+import { ImageOff } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import PokemonTypes from "./pokemon-types"
+import { AspectRatio } from "./ui/aspect-ratio"
 import { Button } from "./ui/button"
 import { Skeleton } from "./ui/skeleton"
 
@@ -36,17 +39,30 @@ export function PokemonCardSkeleton() {
 
 export function PokemonCard(props: Props) {
   const { pokemon } = props
+
   return (
     <Card>
       <Link href={`/pokemons/${pokemon.name}`}>
         <CardHeader>
-          <img
-            src={pokemon.sprites.front_default}
-            alt="Pokemon"
-            width="150px"
-            height="150px"
-            className="mx-auto"
-          />
+          <AspectRatio
+            ratio={4 / 3}
+            className="flex items-center justify-center"
+          >
+            {pokemon.sprites.other.dream_world.front_default ??
+            pokemon.sprites.front_default ? (
+              <Image
+                src={
+                  pokemon.sprites.other.dream_world.front_default ??
+                  pokemon.sprites.front_default
+                }
+                alt={pokemon.name}
+                fill
+                className="object-fill"
+              />
+            ) : (
+              <ImageOff className="h-1/2 w-1/2" />
+            )}
+          </AspectRatio>
         </CardHeader>
       </Link>
       <CardContent className="flex flex-col gap-2">

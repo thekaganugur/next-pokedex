@@ -1,10 +1,13 @@
 import { Header } from "@/components/header"
 import PokemonTypes from "@/components/pokemon-types"
 import { Shell } from "@/components/shell"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { getPokemon } from "@/lib/getPokemon"
 import { getPokemonSpecies } from "@/lib/getSpecies"
 import { capitalize } from "@/lib/utils"
+import { ImageOff } from "lucide-react"
 import { Metadata } from "next"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 
 interface PageProps {
@@ -45,12 +48,24 @@ export default async function PokemonPage({ params }: PageProps) {
   return (
     <Shell>
       <div className="flex flex-col gap-8 md:flex-row md:gap-16">
-        <img
-          src={pokemon.sprites.front_default}
-          alt="Pokemon"
-          width="150px"
-          height="150px"
-        />
+        <div className="w-full md:w-1/2 lg:w-2/5">
+          <AspectRatio ratio={4 / 3}>
+            {pokemon.sprites.other.dream_world.front_default ??
+            pokemon.sprites.front_default ? (
+              <Image
+                src={
+                  pokemon.sprites.other.dream_world.front_default ??
+                  pokemon.sprites.front_default
+                }
+                alt={pokemon.name}
+                fill
+                className="object-fill"
+              />
+            ) : (
+              <ImageOff className="h-1/2 w-1/2" />
+            )}
+          </AspectRatio>
+        </div>
 
         <div className="flex flex-col gap-6 ">
           <Header
