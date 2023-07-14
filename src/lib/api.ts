@@ -34,10 +34,17 @@ export type Pagination<T> = {
   results: T[]
 }
 
-export function pokemonClient<Response>(
+// const sleep = async () => {
+//   await new Promise((resolve) => {
+//     return setTimeout(resolve, 3000)
+//   })
+// }
+
+export async function pokemonClient<Response>(
   endpoint: string,
   config: RequestInit = {}
 ) {
+  // await sleep()
   return client<Response>(`https://pokeapi.co/api/v2/${endpoint}`, config)
 }
 
