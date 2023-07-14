@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card"
 import { Pokemon } from "@/lib/getPokemon"
 import Link from "next/link"
+import PokemonTypes from "./pokemon-types"
 import { Button } from "./ui/button"
 
 type Props = {
@@ -29,9 +30,14 @@ export function PokemonCard(props: Props) {
           />
         </CardHeader>
       </Link>
-      <CardContent>
-        <CardTitle className="capitalize">{pokemon.name}</CardTitle>
-        <CardDescription>#{pokemon.id}</CardDescription>
+      <CardContent className="flex flex-col gap-2">
+        <CardTitle className="flex items-baseline gap-1">
+          <CardDescription>#{pokemon.id}</CardDescription>
+          <span className="capitalize">{pokemon.name}</span>
+        </CardTitle>
+        <div>
+          <PokemonTypes types={pokemon.types.map(({ type }) => type.name)} />
+        </div>
       </CardContent>
       <CardFooter>
         <Button
