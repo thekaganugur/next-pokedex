@@ -30,6 +30,13 @@ export async function generateMetadata({
 
   return {
     title: capitalize(pokemon.name),
+
+    openGraph: {
+      images: [{ url: pokemon.sprites.front_default }],
+    },
+    twitter: {
+      images: [pokemon.sprites.front_default],
+    },
   }
 }
 
