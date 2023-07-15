@@ -4,11 +4,12 @@ import { Shell } from "@/components/shell"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { getPokemon } from "@/lib/getPokemon"
 import { getPokemonSpecies } from "@/lib/getSpecies"
-import { capitalize } from "@/lib/utils"
+import { capitalize, getStats } from "@/lib/utils"
 import { ImageOff } from "lucide-react"
 import { Metadata } from "next"
 import Image from "next/image"
 import { notFound } from "next/navigation"
+import Loading from "./loading"
 
 interface PageProps {
   params: {
@@ -45,6 +46,8 @@ export default async function PokemonPage({ params }: PageProps) {
     notFound()
   }
 
+  // const stats = getStats({ pokemon: pokemon, species: pokemonSpecies })
+
   return (
     <Shell>
       <div className="flex flex-col gap-8 md:flex-row md:gap-16">
@@ -72,8 +75,15 @@ export default async function PokemonPage({ params }: PageProps) {
             title={capitalize(pokemon.name)}
             description={`#${pokemon.id}`}
           />
+          <PokemonTypes types={pokemon.types.map(({ type }) => type.name)} />
 
-          <div>{pokemonSpecies.flavor_text_entries[0].flavor_text}</div>
+          <div>
+            {
+              pokemonSpecies.flavor_text_entries.find(
+                (entry) => entry.language.name === "en"
+              )?.flavor_text
+            }
+          </div>
 
           <div>
             <div>
@@ -92,8 +102,6 @@ export default async function PokemonPage({ params }: PageProps) {
               <div key={ability.name}>{ability.name}</div>
             ))}
           </div>
-
-          <PokemonTypes types={pokemon.types.map(({ type }) => type.name)} />
         </div>
       </div>
     </Shell>
