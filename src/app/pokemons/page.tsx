@@ -14,8 +14,8 @@ type Props = {
 }
 
 export const metadata: Metadata = {
-  title: "Pokemons",
-  description: "Explore pokemons",
+  title: "Pokedex",
+  description: "Explore pokemons!",
 }
 
 export default async function Pokemons({ searchParams }: Props) {

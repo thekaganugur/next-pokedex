@@ -28,8 +28,13 @@ export async function generateMetadata({
     }
   }
 
+  const pokemonSpecies = await getPokemonSpecies(pokemon.species.name)
+
   return {
     title: capitalize(pokemon.name),
+    description: pokemonSpecies.flavor_text_entries.find(
+      (entry) => entry.language.name === "en"
+    )?.flavor_text,
 
     openGraph: {
       images: [{ url: pokemon.sprites.front_default }],
