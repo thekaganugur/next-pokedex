@@ -1,8 +1,7 @@
 import pokemons from "@/data/pokemons.json"
 import { ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { Pokemon } from "./getPokemon"
-import { PokemonSpecies } from "./getSpecies"
+import { Stat } from "./getPokemon"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -33,19 +32,16 @@ export function createQueryString(
   return newSearchParams.toString()
 }
 
-export const getStats = ({
-  species,
-  pokemon,
-}: {
-  species: PokemonSpecies
-  pokemon: Pokemon
-}) => ({
-  species: species?.genera?.find((l) => l.language.name === "en")?.genus,
-  habitat: capitalize(species?.habitat?.name),
-  height: pokemon?.height?.toString().padEnd(1, ".0") + " m",
-  weight: (pokemon?.weight / 10).toFixed(1) + " kg",
-  abilities: pokemon?.abilities?.map(({ ability }) => capitalize(ability.name)),
-  baseExperience: pokemon?.base_experience.toString(),
-  catchRate: ((species?.capture_rate / 255) * 100).toFixed(1) + "%",
-  growthRate: capitalize(species?.growth_rate.name),
+export function findStatValue(stats: Stat[], statName: string) {
+  const stat = stats.find((stat) => stat.stat.name === statName)
+  return stat ? stat.base_stat : null
+}
+
+export const getStats = (stats: Stat[]) => ({
+  hp: findStatValue(stats, "hp"),
+  attack: findStatValue(stats, "attack"),
+  defense: findStatValue(stats, "defense"),
+  specialAttack: findStatValue(stats, "special-attack"),
+  specialDefense: findStatValue(stats, "special-defense"),
+  speed: findStatValue(stats, "speed"),
 })

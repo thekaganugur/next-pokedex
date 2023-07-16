@@ -1,4 +1,5 @@
 import { Header } from "@/components/header"
+import { PokemonStat } from "@/components/pokemon-stat"
 import PokemonTypes from "@/components/pokemon-types"
 import { Shell } from "@/components/shell"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
@@ -9,7 +10,6 @@ import { ImageOff } from "lucide-react"
 import { Metadata } from "next"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import Loading from "./loading"
 
 interface PageProps {
   params: {
@@ -58,7 +58,8 @@ export default async function PokemonPage({ params }: PageProps) {
     notFound()
   }
 
-  // const stats = getStats({ pokemon: pokemon, species: pokemonSpecies })
+  const { hp, attack, defense, specialAttack, specialDefense, speed } =
+    getStats(pokemon.stats)
 
   return (
     <Shell>
@@ -97,22 +98,13 @@ export default async function PokemonPage({ params }: PageProps) {
             }
           </div>
 
-          <div>
-            <div>
-              <span>Height</span>
-              <span>{pokemon.height}</span>
-            </div>
-            <div>
-              <span>Weight</span>
-              <span>{pokemon.weight}</span>
-            </div>
-          </div>
-
-          <div>
-            <div>Abilites</div>
-            {pokemon.abilities.map(({ ability }) => (
-              <div key={ability.name}>{ability.name}</div>
-            ))}
+          <div className="flex flex-col gap-2">
+            <PokemonStat statName="Hp" value={hp} />
+            <PokemonStat statName="Attack" value={attack} />
+            <PokemonStat statName="Defense" value={defense} />
+            <PokemonStat statName="Special Attack" value={specialAttack} />
+            <PokemonStat statName="Special Defense" value={specialDefense} />
+            <PokemonStat statName="Speed" value={speed} />
           </div>
         </div>
       </div>
