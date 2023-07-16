@@ -34,12 +34,6 @@ export type Pagination<T> = {
   results: T[]
 }
 
-// const sleep = async () => {
-//   await new Promise((resolve) => {
-//     return setTimeout(resolve, 3000)
-//   })
-// }
-
 export async function pokemonClient<Response>(
   endpoint: string,
   config: RequestInit = {}

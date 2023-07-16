@@ -45,3 +45,9 @@ export const getStats = (stats: Stat[]) => ({
   specialDefense: findStatValue(stats, "special-defense"),
   speed: findStatValue(stats, "speed"),
 })
+
+export async function sleep(time = 3000) {
+  await new Promise((resolve) => {
+    return setTimeout(resolve, time)
+  })
+}

@@ -1,4 +1,3 @@
-import { PokemonStatSkeleton } from "@/components/pokemon-stat"
 import { Shell } from "@/components/shell"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -19,11 +18,14 @@ export default function Loading() {
             <Skeleton className="h-6 w-28" />
           </div>
 
+          <Skeleton className="h-6 w-28" />
+          <Skeleton className="h-6 w-56" />
+
           <div className="flex flex-col gap-2">
-            <PokemonStatSkeleton />
-            <PokemonStatSkeleton />
-            <PokemonStatSkeleton />
-            <PokemonStatSkeleton />
+            <Skeleton className="h-6 w-32" />
+            <Skeleton className="h-6 w-32" />
+            <Skeleton className="h-6 w-32" />
+            <Skeleton className="h-6 w-32" />
           </div>
         </div>
       </div>
