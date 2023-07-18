@@ -42,19 +42,33 @@ export default function RootLayout({
 
           <footer className="border-t py-6 md:px-8 md:py-0">
             <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-              <div>
-                Built by Kagan Ugur. Source code is available on{" "}
-                <Link
-                  href="https://github.com/thekaganugur/next-pokedex"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  GitHub
-                </Link>
-                <span>.</span>
-              </div>
+              <section>
+                <div className="text-left text-sm leading-loose text-muted-foreground">
+                  Built by{" "}
+                  <Link
+                    href="https://www.linkedin.com/in/thekaganugur"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-semibold transition-colors hover:text-foreground"
+                  >
+                    Kagan Ugur
+                  </Link>
+                  . Source code is available on{" "}
+                  <Link
+                    href="https://github.com/thekaganugur/next-reddit"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-semibold transition-colors hover:text-foreground"
+                  >
+                    GitHub
+                  </Link>
+                  .
+                </div>
+              </section>
 
-              <ThemeToggle />
+              <section>
+                <ThemeToggle />
+              </section>
             </div>
           </footer>
         </Providers>
