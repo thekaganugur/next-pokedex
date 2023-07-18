@@ -40,7 +40,7 @@ export default function RootLayout({
 
           <main className="flex-1">{children}</main>
 
-          <footer className="border-t py-6 md:px-8 md:py-0">
+          <footer className="border-t">
             <div className="container pb-8 pt-6 md:py-8">
               <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
                 <section>
