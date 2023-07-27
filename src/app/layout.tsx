@@ -56,7 +56,7 @@ export default function RootLayout({
                     </Link>
                     . Source code is available on{" "}
                     <Link
-                      href="https://github.com/thekaganugur/next-reddit"
+                      href="https://github.com/thekaganugur/next-pokedex"
                       target="_blank"
                       rel="noreferrer"
                       className="font-semibold transition-colors hover:text-foreground"
